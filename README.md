@@ -3,29 +3,24 @@
 
 ### 使用方式
 
-全局安装：
-
 ```shell script
 npm install suchacha -g
 ```
 
 ```shell script
 $ suchacha -w admire
-```
 
-```shell script
-admire
-uk:  əd'maɪə(r)
-us:  əd'maɪər
-中文释义: 
-vt. 钦佩, 羡慕, 赞美
+    admire
+    uk:  əd'maɪə(r)
+    us:  əd'maɪər
+    中文释义: 
+    vt. 钦佩, 羡慕, 赞美
 ```
 
 ```shell script
 $ suchacha --version
-```
-```shell script
-1.1.0
+
+  1.1.0
 ```
 
 

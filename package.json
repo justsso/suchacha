@@ -1,7 +1,7 @@
 {
   "name": "suchacha",
   "version": "1.0.0",
-  "description": "",
+  "description": "一个快速查英文单词的命令行工具",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,7 +18,7 @@
     "type": "git",
     "url": "git+https://github.com/justsso/suchacha.git"
   },
-  "keywords": [],
+  "keywords": ["单词","工具"],
   "author": "",
   "license": "ISC",
   "bugs": {
