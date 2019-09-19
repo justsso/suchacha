@@ -14,7 +14,7 @@ program.version('1.1.0')
 
 log(chalk.magenta.underline(program.word));
 
-axios.get(`${new_word_url}${program.word}`).then(res => {
+axios.get(`${new_word_url}${program.word}&_=${Date.now()}`).then(res => {
     // console.log(res.data, 22);
     console.log('uk: ', res.data.data.pronunciations.uk);
     console.log('us: ', res.data.data.pronunciations.us);
