@@ -1,7 +1,7 @@
 {
   "name": "suchacha",
-  "version": "1.0.2",
-  "description": "一个快速查英文单词的命令行工具",
+  "version": "2.0.1",
+  "description": "一个快速查英文单词和翻译英文句子的命令行工具",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

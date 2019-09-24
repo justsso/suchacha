@@ -10,7 +10,7 @@ const new_word_url = 'https://www.shanbay.com/api/v1/bdc/search/?version=2&word=
 const log = console.log;
 
 program
-    .version('1.1.0', '-v, --version')
+    .version('2.0.1', '-v, --version')
     .option('-w --word [word]', 'english of word')
     .option('-s --sentence [sentence]', '要进行翻译的英文句子')
     .parse(process.argv);
@@ -38,8 +38,8 @@ if (program.sentence) {
     (async function f() {
         let q = program.sentence;
         let data = await translate(q);
-        await log(chalk.magenta.underline(program.sentence), 38);
-        console.log(data.translation[0], 41);
+        await log(chalk.magenta.underline(program.sentence));
+        console.log(data.translation[0]);
     })();
 
 }
