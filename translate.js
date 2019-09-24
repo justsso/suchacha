@@ -1,53 +1,52 @@
+const Qs = require('qs');
+
 const axios = require('axios');
 const md5 = require('md5');
+const sha256 = require('js-sha256').sha256;
 //获取翻译接口
 let translate_api = 'https://openapi.youdao.com/api';
-
 let appSecret = 'GOPjZoiSnH592P31Qn6xoallHn3zUnSh';
 let appKey = '06fc15a9c06cb290';
 
 //英文翻译成中文
 async function E2Z(q) {
-    var salt = '' + (new Date).getTime();
-// 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
-    var from = 'en';
-    var to = 'zh-CHS';
-    var str1 = appKey + q + salt + appSecret;
-    var data = null;
-    var sign = md5(str1);
-    sign = sign.toUpperCase();
-    q = encodeURI(q);
-    var url = `${translate_api}?q=${q}&from=${from}&to=${to}&appKey=${appKey}&salt=${salt}&sign=${sign}`
 
-    let res = await axios.post(url);
+    let curTime = Math.round(new Date().getTime() / 1000);
+    let salt = (new Date).getTime();
+    let from = 'en';
+    let to = 'zh-CHS';
+    let str1 = appKey + truncate(q) + salt + curTime + appSecret;
+    let sign = sha256(str1);
 
-    // let params = {};
-    // params['from'] = 'en';
-    // params['to'] = 'zh-CHS';
-    // params['appKey'] = appKey;
-    // params['str1'] = appKey + q + salt + appSecret;
-    // params['sign'] = sign;
-    // params['salt'] = salt;
-    // params['q'] = q;
-    // params['signType'] = 'v3';
-    // params['curtime'] = new Date().getTime();
-    //
-    // let res2 = await axios({
-    //     method: 'post',
-    //     url: translate_api,
-    //     data: params,
-    //     headers: {
-    //         'Content-Type': 'application/x-www-form-urlencoded'
-    //     }
-    // });
-    // console.log(res2.data, 40);
 
-    console.log(res.data.translation[0]);
-    return res.data;
+    let params = {};
+    params['from'] = from;
+    params['to'] = to;
+    params['appKey'] = appKey;
+    params['signType'] = 'v3';
+    params['sign'] = sign;
+    params['salt'] = "" + salt;
+    params['q'] = encodeURI(q);
+    params['curtime'] = curTime;
+
+    let res2 = await axios({
+        method: 'post',
+        url: translate_api,
+        data: Qs.stringify(params),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    });
+    return res2.data;
+}
+
+function truncate(q) {
+    let len = q.length;
+    if (len <= 20) return q;
+    return q.substring(0, 10) + len + q.substring(len - 10, len);
 }
 
 module.exports = {
     E2Z
 };
-//jlkjk
 

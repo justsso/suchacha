@@ -16,26 +16,31 @@ program
     .parse(process.argv);
 
 if (program.word) {
-    log(chalk.magenta.underline(program.word));
-
-    axios.get(`${new_word_url}${program.word}&_=${Date.now()}`).then(res => {
-        // console.log(res.data, 22);
-        console.log('uk: ', res.data.data.pronunciations.uk);
-        console.log('us: ', res.data.data.pronunciations.us);
-        if (res.data.data.definitions.cn) {
-            log(chalk.grey('中文释义：'));
-            res.data.data.definitions.cn.forEach((item) => {
-                console.log(item.pos, item.defn);
-            });
+    (async function f() {
+        try {
+            let res = await axios.get(`${new_word_url}${program.word}&_=${Date.now()}`);
+            await log(chalk.magenta.underline(program.word));
+            console.log('uk: ', res.data.data.pronunciations.uk);
+            console.log('us: ', res.data.data.pronunciations.us);
+            if (res.data.data.definitions.cn) {
+                log(chalk.grey('中文释义：'));
+                res.data.data.definitions.cn.forEach((item) => {
+                    console.log(item.pos, item.defn);
+                });
+            }
+        }catch (err) {
+            console.log('你输入的单词不正确');
         }
-    }).catch(err => {
-        console.log('你输入的单词不正确');
-    });
+    })();
 }
 
 if (program.sentence) {
-    log(chalk.magenta.underline(program.sentence));
-    let q = program.sentence;
-    translate(q);
+    (async function f() {
+        let q = program.sentence;
+        let data = await translate(q);
+        await log(chalk.magenta.underline(program.sentence), 38);
+        console.log(data.translation[0], 41);
+    })();
+
 }
 
