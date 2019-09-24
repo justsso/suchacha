@@ -4,14 +4,17 @@ const program = require('commander');
 const fs = require('fs');
 const axios = require('axios');
 const chalk = require('chalk');
-
+const translate = require('./translate').E2Z;
 const word_url = 'https://api.shanbay.com/bdc/search/?word=';
 const new_word_url = 'https://www.shanbay.com/api/v1/bdc/search/?version=2&word=';
 const log = console.log;
-program.version('1.1.0')
+
+program
+    .version('1.1.0', '-v, --version')
     .option('-w --word [word]', 'english of word')
-    .option('-s --s [s]', '要进行翻译的英文句子')
+    .option('-s --sentence [sentence]', '要进行翻译的英文句子')
     .parse(process.argv);
+
 if (program.word) {
     log(chalk.magenta.underline(program.word));
 
@@ -30,8 +33,9 @@ if (program.word) {
     });
 }
 
-console.log(program, 34);
-if (program.s) {
-    log(chalk.magenta.underline(program.s));
+if (program.sentence) {
+    log(chalk.magenta.underline(program.sentence));
+    let q = program.sentence;
+    translate(q);
 }
 

@@ -11,3 +11,5 @@ node_modules/
 .npm
 
 .idea
+translate.js
+commander_learn.md

@@ -3,8 +3,8 @@ const md5 = require('md5');
 //获取翻译接口
 let translate_api = 'https://openapi.youdao.com/api';
 
-var appSecret = 'GOPjZoiSnH592P31Qn6xoallHn3zUnSh';
-var appKey = '06fc15a9c06cb290';
+let appSecret = 'GOPjZoiSnH592P31Qn6xoallHn3zUnSh';
+let appKey = '06fc15a9c06cb290';
 
 //英文翻译成中文
 async function E2Z(q) {
@@ -46,6 +46,8 @@ async function E2Z(q) {
     return res.data;
 }
 
-export default {
+module.exports = {
     E2Z
-}
+};
+
+
