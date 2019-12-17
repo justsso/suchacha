@@ -10,6 +10,7 @@ let appKey = '06fc15a9c06cb290';
 
 //英文翻译成中文
 async function E2Z(q) {
+    console.log(q, 131313)
 
     let curTime = Math.round(new Date().getTime() / 1000);
     let salt = (new Date).getTime();
@@ -28,7 +29,7 @@ async function E2Z(q) {
     params['salt'] = "" + salt;
     params['q'] = encodeURI(q);
     params['curtime'] = curTime;
-
+    console.log(313131);
     let res2 = await axios({
         method: 'post',
         url: translate_api,
@@ -37,6 +38,7 @@ async function E2Z(q) {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     });
+    console.log(res2, 40);
     return res2.data;
 }
 
