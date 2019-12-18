@@ -10,7 +10,7 @@ let appKey = '06fc15a9c06cb290';
 
 //英文翻译成中文
 async function E2Z(q) {
-    console.log(q, 131313)
+    console.log(q);
 
     let curTime = Math.round(new Date().getTime() / 1000);
     let salt = (new Date).getTime();
@@ -18,6 +18,7 @@ async function E2Z(q) {
     let to = 'zh-CHS';
     let str1 = appKey + truncate(q) + salt + curTime + appSecret;
     let sign = sha256(str1);
+    // let sign = hash.sha256().update(str1).digest('hex');
 
 
     let params = {};
@@ -27,9 +28,8 @@ async function E2Z(q) {
     params['signType'] = 'v3';
     params['sign'] = sign;
     params['salt'] = "" + salt;
-    params['q'] = encodeURI(q);
+    params['q'] = q;
     params['curtime'] = curTime;
-    console.log(313131);
     let res2 = await axios({
         method: 'post',
         url: translate_api,
@@ -38,15 +38,23 @@ async function E2Z(q) {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     });
-    console.log(res2, 40);
+    console.log(res2.data.translation[0], 40);
     return res2.data;
 }
 
+//签名算法中的input
 function truncate(q) {
+    if (q === null) {
+        return null;
+    }
     let len = q.length;
+    console.log(len, '长度');
     if (len <= 20) return q;
     return q.substring(0, 10) + len + q.substring(len - 10, len);
 }
+
+
+E2Z("How they treat receptionists, waiters, call-center employees and anyone in a service profession. It speaks volumes about their character and their ability to deal with problems in a rational way.");
 
 module.exports = {
     E2Z
