@@ -54,8 +54,6 @@ function truncate(q) {
 }
 
 
-E2Z("How they treat receptionists, waiters, call-center employees and anyone in a service profession. It speaks volumes about their character and their ability to deal with problems in a rational way.");
-
 module.exports = {
     E2Z
 };
