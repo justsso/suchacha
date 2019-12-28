@@ -1,6 +1,6 @@
 {
   "name": "suchacha",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "一个快速查英文单词和翻译英文句子的命令行工具",
   "main": "index.js",
   "scripts": {
